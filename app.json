@@ -1,0 +1,32 @@
+{
+"expo": {
+"name": "BelanjaKuy",
+"slug": "BelanjaKuy",
+"platforms": [
+"ios",
+"android",
+"web"
+],
+"version": "1.0.0",
+"orientation": "portrait",
+"icon": "./public/favicon.ico",
+"resizeMode": "contain",
+"backgroundColor": "#ffffff"
+},
+"updates": {
+"fallbackToCacheTimeout": 0
+},
+"assetBundlePatterns": [
+"**/*"
+],
+"ios": {
+"supportsTablet": true,
+"bundleIdentifier": "com.belanjakuy.id",
+"buildNumber": "1.0.0"
+},
+"android": {
+"package": "com.belanjakuy.id",
+"versionCode": 1
+},
+"description": "tugas besar mobile programming"
+}
