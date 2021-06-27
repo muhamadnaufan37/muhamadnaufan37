@@ -1,4 +1,4 @@
-import React, { useState }from 'react';
+import React, { useState, useEffect }from 'react';
 
 // material-ui
 import TextField from '@material-ui/core/TextField';
@@ -28,7 +28,7 @@ function Toko(){
     const { firestore, user } = useFirebase();
 
     const tokoDoc = firestore.doc(`toko/${user.uid}`)
-    const [loading] = useDocument(tokoDoc);
+    const [snapshot, loading] = useDocument(tokoDoc);
     const { enqueueSnackbar } = useSnackbar();
     const [form, setForm] = useState({
         nama: '',
