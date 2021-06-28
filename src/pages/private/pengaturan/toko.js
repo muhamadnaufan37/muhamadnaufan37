@@ -46,7 +46,15 @@ function Toko(){
     const [isSubmitting, setSubmitting] = useState(false);
     const [isSomethingChange, setSomethingChange] = useState(false);
     
-    
+    useEffect(() => {
+
+        if (snapshot) {
+
+            setForm(snapshot.data());
+        }
+
+
+    }, [snapshot])
 
     const handleChange = e => {
 
