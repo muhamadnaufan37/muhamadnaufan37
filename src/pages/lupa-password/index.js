@@ -94,13 +94,13 @@ function LupaPassword() {
                 switch (e.code) {
 
                     case 'auth/user-not-found':
-                        newError.email = enqueueSnackbar('Email tidak terdaftar', { variant: 'error' });
+                        newError.email = 'Email tidak terdaftar';
                         break;
                     case 'auth/invalid-email':
-                        newError.email = enqueueSnackbar('Email tidak valid', { variant: 'warning' });
+                        newError.email = 'Email tidak valid';
                         break;
                     default:
-                        newError.email = enqueueSnackbar('Terjadi kesalahan silahkan coba lagi', { variant: 'warning' });
+                        newError.email = 'Terjadi kesalahan silahkan coba lagi';
                         break;
                 }
 
@@ -135,8 +135,7 @@ function LupaPassword() {
                     type="email"
                     name="email"
                     margin="normal"
-                    label="Masukan Email"
-                    variant="outlined"
+                    label="Alamat Email"
                     fullWidth
                     required
                     value={form.email}
