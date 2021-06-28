@@ -9,6 +9,8 @@ import { useFirebase } from '../../../components/FirebaseProvider';
 // styles
 import useStyles from './styles/pengguna';
 
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+
 import { useSnackbar } from 'notistack';
 
 import isEmail from 'validator/lib/isEmail';
@@ -46,7 +48,7 @@ function Pengguna() {
                 displayName
             })
             setSubmitting(false);
-            enqueueSnackbar('Data pengguna berhasil diperbarui', { variant: 'success' })
+            enqueueSnackbar('Data Pengguna Berhasil Di Ganti', { variant: 'success' })
         }
     }
 
@@ -77,16 +79,16 @@ function Pengguna() {
                 let emailError = '';
                 switch (e.code) {
                     case 'auth/email-already-in-use':
-                        emailError = 'Email sudah digunakan oleh pengguna lain';
+                        emailError = enqueueSnackbar('Email sudah digunakan oleh pengguna lain', { variant: 'error' });
                         break;
                     case 'auth/invalid-email':
-                        emailError = 'Email tidak valid';
+                        emailError = enqueueSnackbar('Email tidak valid', { variant: 'warning' });
                         break;
                     case 'auth/requires-recent-login':
-                        emailError = "Silahkan logout, kemudian login kembali untuk memperbarui email";
+                        emailError = enqueueSnackbar("Silahkan logout, kemudian login kembali untuk memperbarui email", { variant: 'success' });
                         break;
                     default:
-                        emailError = 'Terjadi kesalahan silahkan coba lagi';
+                        emailError = enqueueSnackbar('Terjadi kesalahan silahkan coba lagi', { variant: 'warning' });
                         break;
                 }
 
@@ -136,13 +138,13 @@ function Pengguna() {
                 switch (e.code) {
 
                     case 'auth/weak-password':
-                        errorPassword = 'Password terlalu lemah';
+                        errorPassword = enqueueSnackbar('Password terlalu lemah', { variant: 'warning' });
                         break;
                     case 'auth/requires-recent-login':
-                        errorPassword = 'Silahkan logout, kemudian login kembali untuk memperbarui password';
+                        errorPassword = enqueueSnackbar('Silahkan logout, kemudian login kembali untuk memperbarui password', { variant: 'success' });
                         break;
                     default:
-                        errorPassword = 'Terjasi kesalahan silahkan coba lagi';
+                        errorPassword = enqueueSnackbar('Terjasi kesalahan silahkan coba lagi', { variant: 'warning' });
                         break;
 
                 }
@@ -161,6 +163,7 @@ function Pengguna() {
             id="displayName"
             name="displayName"
             label="Nama"
+            variant="outlined"
             margin="normal"
             defaultValue={user.displayName}
             inputProps={{
@@ -177,6 +180,7 @@ function Pengguna() {
             name="email"
             label="Email"
             type="email"
+            variant="outlined"
             margin="normal"
             defaultValue={user.email}
             inputProps={{
@@ -191,10 +195,17 @@ function Pengguna() {
 
         {
             user.emailVerified ?
-                <Typography color="primary" variant="subtitle1">Email Terverifikasi</Typography>
+                <Typography color="primary" variant="subtitle1">
+                <Button
+                    variant="contained"
+                >
+                Email Terverifikasi  <CheckBoxIcon/>
+                </Button>
+                </Typography>
                 :
                 <Button
-                    variant="outlined"
+                    variant="contained"
+                    color="primary"
                     onClick={sendEmailVerification}
                     disabled={isSubmitting}
                 >
@@ -208,6 +219,7 @@ function Pengguna() {
             name="password"
             label="Password Baru"
             type="password"
+            variant="outlined"
             margin="normal"
             inputProps={{
                 ref: passwordRef,

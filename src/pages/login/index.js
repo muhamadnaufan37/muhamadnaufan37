@@ -98,7 +98,7 @@ function Login(props) {
                         newError.password = enqueueSnackbar('Password Salah, Harap Cek Kembali', { variant: 'warning' });
                         break;
                     case 'auth/user-disabled':
-                        newError.email = enqueueSnackbar('Akun Pengguna Telah Di Blokir!!', { variant: 'error' });
+                        newError.email = enqueueSnackbar('Selamat, Akun Pengguna Telah Di Blokir, Karena Menyalahi Aturan Layanan Kami', { variant: 'error' });
                         break;
                     default:
                         newError.email = enqueueSnackbar('Terjadi kesalahan silahkan coba lagi', { variant: 'error' });
@@ -137,7 +137,8 @@ function Login(props) {
                     type="email"
                     name="email"
                     margin="normal"
-                    label="Alamat Email"
+                    label="Masukan Email"
+                    variant="outlined"
                     fullWidth
                     required
                     value={form.email}
@@ -151,7 +152,8 @@ function Login(props) {
                     type="password"
                     name="password"
                     margin="normal"
-                    label="Password"
+                    label="Masukan Password"
+                    variant="outlined"
                     fullWidth
                     required
                     value={form.password}
@@ -180,9 +182,9 @@ function Login(props) {
                     </Grid>
                 </Grid>
             <div className={classes.forgotPassword}>
-            <Typography component={Link} to="lupa-password">
+            <Typography>
 
-                Lupa Password?
+                Lupa Password? <Link to="/lupa-password">Click Here</Link>
 
             </Typography>
             </div>

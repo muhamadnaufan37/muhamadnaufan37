@@ -22,8 +22,12 @@ import { useFirebase } from '../../components/FirebaseProvider';
 // app components
 import AppLoading from '../../components/AppLoading';
 
+import { useSnackbar } from 'notistack';
+
 function Registrasi() {
     const classes = useStyles();
+
+    const { enqueueSnackbar } = useSnackbar();
 
     const [form, setForm] = useState({
         email: '',
@@ -57,17 +61,17 @@ function Registrasi() {
         const newError = { ...error };
 
         if (!form.email) {
-            newError.email = 'Email wajib diisi';
+            newError.email = 'Email wajib di isi';
         } else if (!isEmail(form.email)) {
             newError.email = 'Email tidak valid';
         }
 
         if (!form.password) {
-            newError.password = 'Password wajib diisi';
+            newError.password = 'Password wajib di isi';
         }
 
         if (!form.ulangi_password) {
-            newError.ulangi_password = 'Ulangi Password wajib diisi';
+            newError.ulangi_password = 'Ulangi Password wajib di isi';
         } else if (form.ulangi_password !== form.password) {
             newError.ulangi_password = 'Ulangi Password tidak sama dengan Password';
         }
@@ -86,6 +90,7 @@ function Registrasi() {
             try {
                 setSubmitting(true);
                 await auth.createUserWithEmailAndPassword(form.email, form.password)
+                enqueueSnackbar('Selamat, Akun Berhasil Terdaftar', { variant: 'success' })
             } catch (e) {
 
                 const newError = {};
@@ -93,19 +98,19 @@ function Registrasi() {
                 switch (e.code) {
 
                     case 'auth/email-already-in-use':
-                        newError.email = 'Email sudah terdaftar';
+                        newError.email = enqueueSnackbar('Email sudah terdaftar', { variant: 'error' });
                         break;
                     case 'auth/invalid-email':
-                        newError.email = 'Email tidak valid';
+                        newError.email = enqueueSnackbar('Email tidak valid, silahkan cek kembali', { variant: 'warning' });
                         break;
                     case 'auth/weak-password':
-                        newError.password = 'Password lemah';
+                        newError.password = enqueueSnackbar('Password lemah', { variant: 'warning' });
                         break;
                     case 'auth/operation-not-allowed':
-                        newError.email = 'Metode email dan password tidak didukung';
+                        newError.email = enqueueSnackbar('Metode email dan password tidak didukung', { variant: 'warning' });
                         break;
                     default:
-                        newError.email = 'Terjadi kesalahan silahkan coba lagi';
+                        newError.email = enqueueSnackbar('Terjadi kesalahan silahkan coba lagi', { variant: 'warning' });
                         break;
                 }
 
@@ -140,7 +145,8 @@ function Registrasi() {
                     type="email"
                     name="email"
                     margin="normal"
-                    label="Alamat Email"
+                    label="Masukan Email"
+                    variant="outlined"
                     fullWidth
                     required
                     value={form.email}
@@ -154,7 +160,8 @@ function Registrasi() {
                     type="password"
                     name="password"
                     margin="normal"
-                    label="Password"
+                    label="Masukan Password"
+                    variant="outlined"
                     fullWidth
                     required
                     value={form.password}
@@ -169,6 +176,7 @@ function Registrasi() {
                     name="ulangi_password"
                     margin="normal"
                     label="Confirm Password"
+                    variant="outlined"
                     fullWidth
                     required
                     value={form.ulangi_password}
@@ -177,7 +185,7 @@ function Registrasi() {
                     error={error.ulangi_password ? true : false}
                     disabled={isSubmitting}
                 />
-
+    
                 <Grid container className={classes.buttons}>
                     <Grid item xs>
                         <Button

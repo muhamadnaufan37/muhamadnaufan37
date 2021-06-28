@@ -121,6 +121,7 @@ function Toko(){
                 name="nama"
                 label="Nama Toko"
                 margin="normal"
+                variant="outlined"
                 required
                 fullWidth
                 value={form.nama}
@@ -135,6 +136,7 @@ function Toko(){
                 name="alamat"
                 label="Alamat Toko"
                 margin="normal"
+                variant="outlined"
                 required
                 multiline
                 rowsMax={3}
@@ -151,6 +153,7 @@ function Toko(){
                 name="telepon"
                 label="No Telepon Toko"
                 margin="normal"
+                variant="outlined"
                 required
                 fullWidth
                 value={form.telepon}
@@ -167,6 +170,7 @@ function Toko(){
                 name="website"
                 label="Website Toko"
                 margin="normal"
+                variant="outlined"
                 value={form.website}
                 required
                 fullWidth
